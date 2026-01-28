@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  email     String   @unique
+  fullName  String?
+  bio       String?
+  avatarUrl String?  @default("/assets/profile.jpg")
+  verified  Boolean  @default(false)
+  theme     String   @default("dark")
+  accentColor String @default("#eab308")
+  pageTitle String?
+  metaDescription String?
+  
+  // Smart Features
+  directMode Boolean @default(false) // If true, /:username/nfc redirects to first link
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  links     Link[]
+}
+
+model Link {
+  id        Int      @id @default(autoincrement())
+  label     String
+  url       String
+  icon      String
+  type      String   @default("custom")
+  color     String?
+  clicks    Int      @default(0)
+  order     Int      @default(0)
+  
+  // Scheduling
+  startDate DateTime?
+  endDate   DateTime?
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

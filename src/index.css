@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #4F46E5;
+    /* Indigo 600 */
+    --color-primary-dark: #4338ca;
+    /* Indigo 700 */
+    --color-secondary: #0f172a;
+    /* Slate 900 */
+    --color-surface-light: #ffffff;
+    --color-surface-dark: #0f172a;
+    --font-main: 'Inter', sans-serif;
+  }
+
+  html {
+    font-family: var(--font-main);
+  }
+
+  body {
+    @apply bg-white text-gray-900 dark:bg-slate-950 dark:text-gray-100 transition-colors duration-300;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply tracking-tight font-bold text-gray-900 dark:text-white;
+  }
+
+  p {
+    @apply text-gray-600 dark:text-gray-300 leading-relaxed;
+  }
+}
+
+
+@layer components {
+  .btn-primary {
+    @apply bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[var(--color-primary-dark)] transition-colors shadow-lg shadow-indigo-500/30;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors border border-gray-200 shadow-sm;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-[var(--color-primary)] border-2 border-[var(--color-primary)] px-6 py-3 rounded-lg font-semibold hover:bg-[var(--color-primary)] hover:text-white transition-colors;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
